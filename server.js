@@ -148,6 +148,16 @@ app.post('/send', (req, res)=>{
     res.sendFile(__dirname + '/public/index.html');
 })
 
+app.post('/newpost', (req, res)=>{
+    var titulo = req.body.titulo;
+    var data = req.body.data;
+    var conteudo = req.body.conteudo;
+    console.log(titulo);
+    console.log(data);
+    console.log(conteudo);
+    res.sendFile(__dirname + '/public/newpost.html');
+})
+
 
 const port = process.env.PORT || 3000;
 

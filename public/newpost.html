@@ -1,0 +1,44 @@
+<!DOCTYPE>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>masésobreoq</title>
+        <!--<script src="script.js"></script> -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a class="active" href="index.html">Home</a></li>
+                <li><a href="newpost.html">Post</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li>
+              </ul>
+        </nav>
+        <div class="feed">
+            <div class="titulo-pagina">
+                <h1> Nova Postagem </h1>
+            </div>
+            <div class="post">
+                <form action="/newpost" method="POST">
+                    <input type="text" id="titulo-post" name="titulo" placeholder="titulo"><br>
+                    <input type="date" id="date-post" name="data"><br>
+                    <textarea class="text-area" id="conteudo" name="conteudo"></textarea><br><br><br>
+                    <input type="button" value="manda" onclick="showPreviewOfPost()">
+                    <input type="submit" value="post" >
+                </form>
+            </div>
+            <br><br><br>
+            <div class="titulo-pagina">
+                <h1> Preview </h1>
+            </div>
+            <div class="post">
+                <h1 id="preview-title"></h1>
+                <h4 id="preview-date"></h4>
+                <p id="preview-text"></p> 
+                <p>ass: falcon</p>
+            </div>
+        </div>
+    <script src="script.js"></script>
+    </body>
+</html>
