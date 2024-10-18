@@ -2,6 +2,50 @@
 //upContent();
 //console.log(buscaId("titulo-post"));
 
+/*fetch('http://localhost:3000/index3', {method: 'GET'}.then(
+    function(response){
+        if(response.ok){
+            console.log(response.status);
+        }
+    }
+))*/
+/*console.log("TESTE");
+fetch('http://localhost:3000/index3', {method: 'GET'}.then(
+    function(res){
+        console.log("response?" + res);
+    }
+))*/
+
+/*async function getData() {
+    const url = "http://localhost:3000/index3";
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+  
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.log("ERRRO");
+    }
+  }
+getData();*/
+
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+fetch("http://localhost:3000/index3")
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+
+/*const response = fetch("http://localhost:3000/index3", {
+  method: "GET",
+  body: JSON.stringify({ titulo: "example" }),
+  headers: myHeaders,
+});*/
+//console.log(response);
+
 
 /* functions */
 function showPreviewOfPost(){ //DONE Funcional

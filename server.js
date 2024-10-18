@@ -148,7 +148,7 @@ app.post('/send', (req, res)=>{
     res.sendFile(__dirname + '/public/index.html');
 })
 
-app.post('/newpost', (req, res)=>{
+/*app.post('/newpost', (req, res)=>{
     var titulo = req.body.titulo;
     var data = req.body.data;
     var conteudo = req.body.conteudo;
@@ -156,7 +156,75 @@ app.post('/newpost', (req, res)=>{
     console.log(data);
     console.log(conteudo);
     res.sendFile(__dirname + '/public/newpost.html');
+})*/
+
+app.post('/newpost', (req, res)=>{
+    var titulo = req.body.titulo;
+    var data = req.body.data;
+    var conteudo = req.body.conteudo;
+    console.log(titulo);
+    console.log(data);
+    console.log(conteudo);
+    pool.getConnection().then(conn => {
+        conn.query("INSERT INTO novos_posts VALUES (0, "+ "'"+data+"'" + "," + "'"+titulo+"'" + "," + "'"+conteudo+"'" + ")").then((rows)=>{
+            console.log(rows);
+            return res.json(rows);
+        }).then((res)=>{
+            console.log(res);
+            conn.end();
+        }).catch(err =>{
+            conn.end();
+        })
+    }).catch(err =>{
+        console.log("ERROR2");
+    });
+    res.sendFile(__dirname + '/public/newpost.html');
 })
+
+app.get("/index3", (req, res) => {
+    pool.getConnection().then(conn => {
+        conn.query("SELECT * FROM novos_posts").then((rows)=>{
+            //console.log(rows);
+            //console.log(rows[0].titulo);
+            //console.log(res.body.rows.json());
+            console.log(rows);
+            const json = JSON.stringify(rows)
+            console.log("json: " + json);
+            console.log(res.json(json))
+            return res.json(json);
+        }).then((res)=>{
+            console.log(res);
+            conn.end();
+        }).catch(err =>{
+            conn.end();
+        })
+    }).catch(err =>{
+        });
+    res.sendFile(__dirname + '/public/index3.html');
+  });
+
+/*app.get('/index3', (req, res)=>{
+    pool.getConnection().then(conn => {
+        conn.query("SELECT * FROM novos_posts").then((rows)=>{
+            console.log(rows);
+            console.log(rows[0].titulo);
+            var titulo = rows[0].titulo;
+            //return titulo;
+            //return res.json(rows);
+            //res.json(rows);
+            console.log(rows[0].titulo);
+            res.send("<h1 id=" + "titulo-post-home" + ">" + titulo + "</h1>");
+            //res.sendFile(__dirname + '/public/index3.html')
+        }).then((res)=>{
+            console.log(res);
+            conn.end();
+        }).catch(err =>{
+            conn.end();
+        })
+    }).catch(err =>{
+    });
+    //res.sendFile(__dirname + '/public/index3.html')
+})*/
 
 
 const port = process.env.PORT || 3000;
