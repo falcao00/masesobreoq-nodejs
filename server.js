@@ -187,20 +187,19 @@ app.get("/index3", (req, res) => {
             //console.log(rows);
             //console.log(rows[0].titulo);
             //console.log(res.body.rows.json());
-            console.log(rows);
+            //console.log(rows);
             const json = JSON.stringify(rows)
-            console.log("json: " + json);
-            console.log(res.json(json))
+            //console.log("json: " + json);
+            //console.log(res.json(json))
             return res.json(json);
         }).then((res)=>{
-            console.log(res);
+            //var serverinfo = JSON.parse(res);
             conn.end();
         }).catch(err =>{
             conn.end();
         })
     }).catch(err =>{
         });
-    res.sendFile(__dirname + '/public/index3.html');
   });
 
 /*app.get('/index3', (req, res)=>{

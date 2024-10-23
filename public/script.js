@@ -33,11 +33,38 @@ fetch('http://localhost:3000/index3', {method: 'GET'}.then(
 getData();*/
 
 const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Content-Type", "application/json")
 
 fetch("http://localhost:3000/index3")
-  .then((response) => response.json())
-  .then((json) => console.log(json));
+  .then((response) => {
+    return response.json();
+  }).then((data)=>{
+    const obj = JSON.parse(data);
+    console.log(obj);
+    getObjfromBdandpost(obj);
+    //console.log(data);
+    //console.log(obj[0].titulo);
+    //document.getElementById("titulo-bd").innerText = obj[0].titulo;
+    //document.getElementById("post-bd").innerHTML = obj[0].conteudo;
+  })
+
+/*<div class='post' id='post'>
+                <h1 class='titulo-bd' id='titulo-bd'></h1>
+                <p class='post-bd' id='post-bd'></p>
+            </div><br></br>*/
+
+function getObjfromBdandpost(obj){
+    for (const x in obj){
+        //console.log(obj[x].titulo);
+        var initPost = "<div class='post' id='post'>";
+        var title = "<h1 class='titulo-bd' id='titulo-bd'>" + obj[x].titulo + "</h1>";
+        var content = "<p class='post-bd' id='post-bd'>" + obj[x].conteudo + "</p>";
+        var closePost = "</div>"
+        var fullstring = initPost + title + content + closePost;
+        document.getElementById("feed-home").innerHTML += fullstring;
+    }
+    //console.log(fullstring)
+}
 
 /*const response = fetch("http://localhost:3000/index3", {
   method: "GET",
